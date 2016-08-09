@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">GoSnow</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="facebook_app_id">1705986982996956</string>
+    <string name="title_activity_ride_now">RideNowActivity</string>
+
+    <string name="title_skip">SKIP</string>
+    <string name="title_finish">FINISH</string>
+</resources>
