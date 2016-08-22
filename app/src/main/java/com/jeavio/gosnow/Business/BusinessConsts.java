@@ -71,6 +71,10 @@ public class BusinessConsts {
     public static final String SHAREDCONTACTS = "sharedContacts";
     public static final String SHAREDCONTACT_COUNT = "sharedContactCount";
 
+    public static final String IS_FIRSTTIME = "isFirstTime";
+
+    public static final String TNC_URL = "http://support.gosnowapp.com/eula.html";
+
 }
 
 

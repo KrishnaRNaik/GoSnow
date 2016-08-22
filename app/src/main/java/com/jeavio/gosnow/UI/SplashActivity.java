@@ -12,11 +12,6 @@ import android.view.MenuItem;
 import com.jeavio.gosnow.R;
 import com.jeavio.gosnow.UI.Adapators.SplashScreenAdaptor;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
 public class SplashActivity extends AppCompatActivity {
 
     ViewPager viewPager;
@@ -43,27 +38,6 @@ public class SplashActivity extends AppCompatActivity {
         // Binds the Adapter to the ViewPager
         viewPager.setAdapter(adapter);
 
-        SimpleDateFormat curFormater = new SimpleDateFormat("MM/dd/yyyy");
-        String birthday = "8/14/1980";
-        Date date = null;
-        try {
-            date = curFormater.parse(birthday);
-        } catch (ParseException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        Calendar dob = Calendar.getInstance();
-        Calendar today = Calendar.getInstance();
-
-        dob.setTime(date);
-
-        int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
-
-        if (today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)){
-            age--;
-        }
-        int ageofuser = age;
 
 
     }
@@ -90,6 +64,8 @@ public class SplashActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    // This method will show login screen
+    // When user selects skip or finish from splash screen, this method will be called.
     public void ShowLoginScreen()
     {
         Intent intent = new Intent(this, LoginActivity.class);

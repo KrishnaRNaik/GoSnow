@@ -48,6 +48,8 @@ public class User {
     String tripImage;
     String tripThumbImage;
     String onlineTill;
+    int nextDestinationId;
+    String nextDestinationName;
 
   //  @property (nonatomic, retain) NSString *isOnline;
 
@@ -405,5 +407,21 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getNextDestinationId() {
+        return nextDestinationId;
+    }
+
+    public void setNextDestinationId(int nextDestinationId) {
+        this.nextDestinationId = nextDestinationId;
+    }
+
+    public String getNextDestinationName() {
+        return nextDestinationName;
+    }
+
+    public void setNextDestinationName(String nextDestinationName) {
+        this.nextDestinationName = nextDestinationName;
     }
 }

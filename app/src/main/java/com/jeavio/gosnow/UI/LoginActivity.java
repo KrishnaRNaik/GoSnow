@@ -8,7 +8,10 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.facebook.login.LoginManager;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -17,6 +20,7 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.jeavio.gosnow.Business.BusinessConsts;
 import com.jeavio.gosnow.Business.GoSnowLoginManager;
 import com.jeavio.gosnow.Model.User;
 import com.jeavio.gosnow.R;
@@ -30,20 +34,32 @@ public class LoginActivity extends AppCompatActivity {
     private LoginButton loginButtonfb;
     private Button btnLogin;
     private TransparentProgressDialog progressDialog;
-    String userName,firstname,lastname,gender,birthday,facebookid;
     User user;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Initialize the facebook sdk
         FacebookSdk.sdkInitialize(getApplicationContext());
-        setContentView(R.layout.activity_login);
+
+       setContentView(R.layout.activity_login);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         // Hide the action bar from the activity
         getSupportActionBar().hide();
+
+        TextView tncText = (TextView)findViewById(R.id.terms3id);
+        tncText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(LoginActivity.this,TNCActivity.class);
+                startActivity(intent);
+                            }
+        });
+
 
     }
 
@@ -51,10 +67,14 @@ public class LoginActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        callbackManager=CallbackManager.Factory.create();
+        // Logout from facebook, if logged in
+        // This is temporary, Once the flow is final this will be removed
+        LoginManager.getInstance().logOut();
 
+        callbackManager=CallbackManager.Factory.create();
         loginButtonfb= (LoginButton)findViewById(R.id.login_buttonfb);
 
+        // Ask for user permission to access user profile, email,birthday
         loginButtonfb.setReadPermissions("public_profile", "email","user_friends","user_birthday");
 
         btnLogin= (Button) findViewById(R.id.btnLogin);
@@ -63,19 +83,16 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 progressDialog = new TransparentProgressDialog(LoginActivity.this,R.drawable.spinner_blue,"");
-                //progressDialog.setMessage("Loading...");
                 progressDialog.show();
 
                 loginButtonfb.performClick();
-
                 loginButtonfb.setPressed(true);
-
                 loginButtonfb.invalidate();
                 loginButtonfb.registerCallback(callbackManager, mCallBack);
-
                 loginButtonfb.setPressed(false);
-
                 loginButtonfb.invalidate();
+
+
             }
         });
     }
@@ -91,8 +108,6 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         public void onSuccess(LoginResult loginResult) {
 
-           //progressDialog.dismiss();
-
             // App code
             GraphRequest request = GraphRequest.newMeRequest(
                     loginResult.getAccessToken(),
@@ -105,49 +120,34 @@ public class LoginActivity extends AppCompatActivity {
                             Log.e("response: ", response + "");
                             try {
 
-                                //userName =  object.getString("name").toString();
-                                firstname = object.getString("first_name").toString();
-                                lastname = object.getString("last_name").toString();
-                                gender = object.getString("gender").toString();
-                                //userName =  object.getString("name").toString();
-                                birthday = object.getString("birthday").toString();
-                                facebookid = object.getString("id").toString();
+                               // user = new User();
+                                CommonUtility.ParseFbResponse(object);
+                               /* if(!object.isNull("first_name"))
+                                    user.setFirstName(object.getString("first_name").toString());
 
-                                user = new User();
-                                user.setFirstName(object.getString("first_name").toString());
-                                user.setLastName(object.getString("last_name").toString());
-                                user.setFacebookId(facebookid);
-                                user.setGender(gender);
-                                user.setEmail(object.getString("email").toString());
-                                int age = CommonUtility.GetAge(birthday);
-                                user.setAge(String.valueOf(age));
+                                if(!object.isNull("last_name"))
+                                    user.setLastName(object.getString("last_name").toString());
 
+                                if(!object.isNull("gender"))
+                                    user.setGender( object.getString("gender").toString());
 
-                               /* user = new User();
+                                if(!object.isNull("birthday"))
+                                {
+                                    String birthday = object.getString("birthday").toString();
+                                    int age = CommonUtility.GetAge(birthday);
+                                    user.setAge(String.valueOf(age));
+                                }
+                                if(!object.isNull("id"))
+                                    user.setFacebookId(object.getString("id").toString());
 
-
-                                user.facebookID = object.getString("id").toString();
-                                user.email = object.getString("email").toString();
-                                //user.name = object.getString("name").toString();
-                                user.gender = object.getString("gender").toString();
-                                String birthday = object.getString("birthday").toString();
-                                user.name = birthday;
-                                PrefUtils.setCurrentUser(user,MainActivity.this);*/
-
-
+                                if(!object.isNull("email"))
+                                    user.setEmail(object.getString("email").toString());*/
 
                             }catch (Exception e){
                                 e.printStackTrace();
                             }
 
-
-
-                           /* Toast.makeText(LoginActivity.this,"welcome "+user.getFirstName() + user.getLastName(),Toast.LENGTH_LONG).show();
-                            Intent intent=new Intent(LoginActivity.this,RideNowActivity.class);
-                            intent.putExtra("facebookId",user.getFacebookId());
-                            startActivity(intent);*/
-                            //finish();
-
+                            // If facebook login is successful, sign up with GoSnow server
                             SigninUser  signuser =  new SigninUser();
                             signuser.execute();
 
@@ -156,7 +156,6 @@ public class LoginActivity extends AppCompatActivity {
                     });
 
             Bundle parameters = new Bundle();
-            //parameters.putString("fields", "id,email,gender,birthday,");
             parameters.putString("fields","id,email,first_name,last_name,gender,birthday");
             request.setParameters(parameters);
             request.executeAsync();
@@ -175,27 +174,21 @@ public class LoginActivity extends AppCompatActivity {
 
 
     /**
-     * An Asynctask, to download database from Azure mobile service
+     * An Asynctask, to sign up with Go Snow server.
      */
     private class SigninUser extends AsyncTask<String, Integer, String> {
 
         String error = null;
-
-     /*   TransparentProgressDialog pd = new TransparentProgressDialog(SalesActivity.this,R.drawable.spinner_blue,
-                getString(R.string.title_downloaddb));*/
-
         public void onPreExecute() {
 
-            // pd.setTitle(R.string.title_wait);
-            // pd.setMessage(getString(R.string.title_downloaddb));
-            // ((TransparentProgressDialog) pd).show();
         }
 
         // Invoked by execute() method of this object
         @Override
         protected String doInBackground(String... url) {
 
-            error = GoSnowLoginManager.getLoginManager().signin(LoginActivity.this, user);
+            // Perform sign in
+            error = GoSnowLoginManager.getLoginManager().signin(LoginActivity.this);
             return error;
         }
 
@@ -204,17 +197,22 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(String errorMsg) {
             // cancel the progress dialog
             progressDialog.dismiss();
-            String title = "error";//getString(R.string.title_error);
+            String title = getString(R.string.title_error);
 
+            // If sign in is successful then show RideNow screen
             if (errorMsg == null) {
                 Intent intent = new Intent(LoginActivity.this, RideNowActivity.class);
-                intent.putExtra("facebookId", user.getFacebookId());
+                //intent.putExtra("facebookId", user.getFacebookId());
                 startActivity(intent);
+
+                // If login is successful, then set isFirstTime flag to false
+                CommonUtility.SetIsOpened(LoginActivity.this);
                 finish();
             }
-
-            // Show the message
-            //UIUtility.showSimpleAlert(title, errorMsg, SalesActivity.this);
+            else {
+                // Show the error message
+                Toast.makeText(LoginActivity.this, errorMsg, Toast.LENGTH_SHORT).show();
+            }
 
             return;
 

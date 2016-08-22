@@ -3,6 +3,7 @@ package com.jeavio.gosnow.Comms;
 import android.content.Context;
 import android.util.Base64;
 
+import com.jeavio.gosnow.Business.BusinessConsts;
 import com.jeavio.gosnow.Model.User;
 
 import org.json.JSONException;
@@ -40,14 +41,14 @@ public class CommsManager {
         return _commsManager;
     }
 
-    public  int SigninUser(User user, Context context)
+    public CommsResult SigninUser(User user, Context context)
     {
         OutputStream os = null;
         BufferedReader in = null;
         HttpURLConnection conn = null;
-        int result = CommsUtility.COMMS_ERROR;
-
-
+       // String error = null;
+        CommsResult result = new CommsResult();
+        result.errorCode = CommsUtility.COMMS_ERROR;
         try {
 
             URL url = new URL(CommsUtility.BASE_URL + CommsUtility.SIGNIN_USER_URL);
@@ -63,18 +64,21 @@ public class CommsManager {
 
             JSONObject obj = new JSONObject();
 
-            obj.put(CommsUtility.FACEBOOK_ID, /*user.getFacebookId()*/"12345431");
+            obj.put(BusinessConsts.FACEBOOK_ID, user.getFacebookId());
+            
+            if(user.getFirstName() != null) {
+                byte[] dataFirstName = user.getFirstName().getBytes("UTF-8");
+                String encodedFirstName = Base64.encodeToString(dataFirstName, Base64.DEFAULT);
+                obj.put(BusinessConsts.FIRST_NAME, encodedFirstName);
+            }
 
-            byte[] data = user.getFirstName().getBytes("UTF-8");
-            String encodedFirstName = Base64.encodeToString(data, Base64.DEFAULT);
-            obj.put(CommsUtility.FIRST_NAME, encodedFirstName);
-
-            byte[] dataLastName = user.getLastName().getBytes("UTF-8");
-            String encodedLastName = Base64.encodeToString(data, Base64.DEFAULT);
-
-            obj.put(CommsUtility.LAST_NAME, encodedLastName);
-            obj.put(CommsUtility.GENDER, user.getGender());
-            obj.put(CommsUtility.AGE,user.getAge());
+            if(user.getLastName() != null) {
+                byte[] dataLastName = user.getLastName().getBytes("UTF-8");
+                String encodedLastName = Base64.encodeToString(dataLastName, Base64.DEFAULT);
+                obj.put(BusinessConsts.LAST_NAME, encodedLastName);
+            }
+            obj.put(BusinessConsts.GENDER, user.getGender());
+            obj.put(BusinessConsts.AGE,user.getAge());
 
             String message = obj.toString();
 
@@ -100,28 +104,23 @@ public class CommsManager {
                 while ((inputLine = in.readLine()) != null) {
                     response.append(inputLine);
                 }
-                res = response.toString();
-                String resul = res;
-               /* if(!res.equals(CommsUtility.LOGIN_FAIL))
-                {
-                    BusinessUtility.DEVICE_ID = res;
-                    currentUser.setDeviceId(res);
-                    result = CommsUtility.AUTHENTICATION_SUCCESS;
-                }
-                else
-                    result = CommsUtility.AUTHENTICATION_ERROR;*/
-            }
-            else
-                result = CommsUtility.COMMS_ERROR;
+                result.setResponse(response.toString());
+                result.setErrorCode(CommsUtility.COMMS_SUCCESS);
+                         }
+
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
+
         } catch (ProtocolException e) {
             e.printStackTrace();
+           // error = e.getMessage();
         } catch (IOException e) {
             e.printStackTrace();
+          // error = e.getMessage();
         } catch (JSONException e) {
             e.printStackTrace();
+          //  error = e.getMessage();
         } finally {
             //clean up
             try {
@@ -135,7 +134,9 @@ public class CommsManager {
                 e.printStackTrace();
             }
 
-            conn.disconnect();
+            if(conn != null)
+                conn.disconnect();
+
             return result;
         }
 
