@@ -7,4 +7,39 @@
 
     <string name="title_skip">SKIP</string>
     <string name="title_finish">FINISH</string>
+    <string name="error_connection">Not able to connect to server</string>
+    <string name="title_activity_start_up">GoSnow</string>
+    <string name="title_activity_options_menu_base">OptionsMenuBaseActivity</string>
+
+    <string name="title_error">Error</string>
+
+    <string-array name="nav_drawer_items">
+        <item>RIDING NOW</item>
+        <item>CONNECT</item>
+        <item>EVENTS</item>
+        <item>MESSAGES</item>
+        <item>SNOW BUDDIES</item>
+        <item>NOTIFICATIONS</item>
+        <item>SETTINGS</item>
+
+    </string-array>
+    <array name="nav_drawer_icons">
+        <item>@drawable/ic_launcher</item>
+        <item>@drawable/ic_launcher</item>
+        <item>@drawable/ic_launcher</item>
+        <item>@drawable/ic_launcher</item>
+        <item>@drawable/ic_launcher</item>
+        <item>@drawable/ic_launcher</item>
+    </array>
+    <string name="title_activity_connect">ConnectActivity</string>
+    <string name="title_activity_events">EventsActivity</string>
+
+    <string name="title_terms1">*We never post anything to facebook</string>
+    <string name="title_terms2">By using GoSnow you agree to the</string>
+    <string name="title_terms3">Terms and Conditions</string>
+    <string name="title_activity_tnc">TNCActivity</string>
+    <string name="title_loadingpage">"Loading Page"</string>
+
+
+
 </resources>
