@@ -13,6 +13,9 @@ public class CommsUtility {
     // URL to authenticate new user
     public static final String  SIGNIN_USER_URL = "/gosnow/index.php/service/auth/signin";
 
+    // URL to add photo
+    public static final String  ADD_PHOTO_URL = "/gosnow/index.php/service/user/addPhoto";
+
     // constant error code for authentication error
     public static final int COMMS_ERROR = 1;
 

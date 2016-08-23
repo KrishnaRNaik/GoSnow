@@ -1,7 +1,6 @@
 package com.jeavio.gosnow.UI;
 
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,18 +10,14 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jeavio.gosnow.Globals;
@@ -42,15 +37,9 @@ public class OptionsMenuBaseActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private LinearLayout mDrawerLinearLayout;
-    private ActionBarDrawerToggle mDrawerToggle;
-    protected RelativeLayout _completeLayout, _activityLayout;
-    // nav drawer title
-    private CharSequence mDrawerTitle;
+
     private ImageView profileImage;
     Bitmap bitmap;
-
-    // used to store app title
-    private CharSequence mTitle;
 
     private ArrayList<NavDrawerItem> navDrawerItems;
     private NavDrawerListAdapter adapter;
@@ -65,7 +54,6 @@ public class OptionsMenuBaseActivity extends AppCompatActivity {
 
 
     public void set(String[] navMenuTitles,TypedArray navMenuIcons) {
-        mTitle = mDrawerTitle = getTitle();
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.list_view_drawer);
@@ -93,40 +81,6 @@ public class OptionsMenuBaseActivity extends AppCompatActivity {
         adapter = new NavDrawerListAdapter(getApplicationContext(),
                 navDrawerItems);
         mDrawerList.setAdapter(adapter);
-
-
-       /* getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        // getSupportActionBar().setIcon(R.drawable.ic_drawer);*/
-
-
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
-                R.drawable.ic_drawer, // nav menu toggle icon
-                R.string.app_name, // nav drawer open - description for
-                // accessibility
-                R.string.app_name // nav drawer close - description for
-                // accessibility
-        ) {
-            public void onDrawerClosed(View view) {
-                getSupportActionBar().setTitle(mTitle);
-
-                // calling onPrepareOptionsMenu() to show action bar icons
-                supportInvalidateOptionsMenu();
-            }
-
-            public void onDrawerOpened(View drawerView) {
-                getSupportActionBar().setTitle(mDrawerTitle);
-                getSupportActionBar().hide();
-                // calling onPrepareOptionsMenu() to hide action bar icons
-                supportInvalidateOptionsMenu();
-            }
-        };
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
-
-        // enabling action bar app icon and behaving it as toggle button
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_drawer);
 
         Globals globals = Globals.getInstance();
         final User user = globals.getUser();
@@ -175,29 +129,11 @@ public class OptionsMenuBaseActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        if (item.getItemId() == android.R.id.home) {
-            if (mDrawerLayout.isDrawerOpen(mDrawerLinearLayout)) {
-                mDrawerLayout.closeDrawer(mDrawerLinearLayout);
-            } else {
-                mDrawerLayout.openDrawer(mDrawerLinearLayout);
-            }
-        }
-
-        return super.onOptionsItemSelected(item);
+    /* Opens navigation drawer with list items */
+    public  void openDrawer(View view) {
+        mDrawerLayout.openDrawer(mDrawerLinearLayout);
     }
 
 
@@ -212,34 +148,8 @@ public class OptionsMenuBaseActivity extends AppCompatActivity {
     }
 
 
-
-
-    /***
-     * Called when invalidateOptionsMenu() is triggered
-     */
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        // if nav drawer is opened, hide the action items
-        // boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-        // menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
-        return super.onPrepareOptionsMenu(menu);
-    }
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        // Sync the toggle state after onRestoreInstanceState has occurred.
-        mDrawerToggle.syncState();
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        // Pass any configuration change to the drawer toggls
-        mDrawerToggle.onConfigurationChanged(newConfig);
-    }
-    /**
-     * Diplaying fragment view for selected nav drawer list item
+     /**
+     * Displays screens for selected nav drawer list item
      * */
     private void displayView(int position) {
         // update the main content by replacing fragments
@@ -284,17 +194,8 @@ public class OptionsMenuBaseActivity extends AppCompatActivity {
         mDrawerLayout.closeDrawer(mDrawerLinearLayout);
     }
 
-    @Override
-    public void setTitle(CharSequence title) {
-        mTitle = title;
-        getActionBar().setTitle(mTitle);
-    }
 
-    /**
-     * When using the ActionBarDrawerToggle, you must call it during
-     * onPostCreate() and onConfigurationChanged()...
-     */
-
+    /* Sets rounded bitmap */
     private void SetRoundedImage(Bitmap original) {
         // TODO Auto-generated method stub
         Bitmap mask = BitmapFactory.decodeResource(getResources(),

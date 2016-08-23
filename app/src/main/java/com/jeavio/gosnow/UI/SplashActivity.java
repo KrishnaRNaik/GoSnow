@@ -16,9 +16,9 @@ public class SplashActivity extends AppCompatActivity {
 
     ViewPager viewPager;
     PagerAdapter adapter;
-    int[] splashImages = new int[] { R.drawable.splash1, R.drawable.splash2,
-            R.drawable.splash3, R.drawable.splash4,
-            R.drawable.splash5};
+    int[] splashImages = new int[] { R.drawable.onboard1, R.drawable.onboard2,
+            R.drawable.onboard3, R.drawable.onboard4,
+            R.drawable.onboard5};
 
 
     @Override

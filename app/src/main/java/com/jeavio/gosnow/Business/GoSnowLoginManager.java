@@ -101,4 +101,22 @@ public class GoSnowLoginManager {
 
     }
 
+    public String signUp(Context context) {
+        String error = null;
+        CommsResult result = null;
+        error = signin(context);
+        if(error != null)
+            return error;
+        else
+        {
+            Globals globals = Globals.getInstance();
+            User currentuser = globals.getUser();
+            result = CommsManager.getCommsManager().AddPhoto(currentuser,context);
+        }
+
+        return error;
+
+    }
+
+
 }

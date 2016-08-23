@@ -75,6 +75,14 @@ public class BusinessConsts {
 
     public static final String TNC_URL = "http://support.gosnowapp.com/eula.html";
 
+    public static final String ADDPHOTO_IMAGE = "image";
+
+    public static final String ADDPHOTO_IMAGEURL = "imageUrl";
+
+    public static final String ADDPHOTO_ISPROFILEIMAGE = "isProfileImage";
+
+
+
 }
 
 

@@ -16,6 +16,7 @@ public class ConnectActivity extends OptionsMenuBaseActivity {
         setContentView(R.layout.activity_connect);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().hide();
 
         navMenuTitles = getResources().getStringArray(R.array.nav_drawer_items); // load titles from strings.xml
 

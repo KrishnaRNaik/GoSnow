@@ -4,11 +4,9 @@ import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
-import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -37,8 +35,7 @@ public class RideNowActivity extends OptionsMenuBaseActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setTitle("RIDING NOW");
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        getSupportActionBar().hide();
 
         Globals globals = Globals.getInstance();
         final User user = globals.getUser();
@@ -55,7 +52,7 @@ public class RideNowActivity extends OptionsMenuBaseActivity {
             protected Void doInBackground(Void... params) {
                 URL imageURL = null;
                 try {
-                    imageURL = new URL("https://graph.facebook.com/" + /*user.getFacebookId()*/ "135906693515634"+ "/picture?type=large");
+                    imageURL = new URL("https://graph.facebook.com/" + /*user.getFacebookId()*/ "135906693515634"+ "/picture?width=400&height=400");
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
                 }
