@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Hey There!"
+            android:id="@+id/text1id"
+            android:layout_gravity="center_horizontal"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="We are happy you're here"
+            android:id="@+id/text2id"
+            android:layout_gravity="center_horizontal"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="TELL US WHAT YOU ARE?"
+            android:id="@+id/text3id"
+            android:layout_marginTop="15dp"/>
+
+        <TableLayout
+            android:id="@+id/ridertype"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="5dp"
+            android:layout_margin="5dp"
+            android:layout_gravity="center_horizontal"
+
+
+            >
+            <TableRow  android:gravity="center"
+                android:background="#8e8e83"
+                >
+
+                <TextView
+                    android:id="@+id/snowborderid"
+                    android:text="Snowboarder"
+                    android:layout_margin="1dp"
+                    android:textStyle="bold"
+                    android:padding="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#ffffff"
+                    android:gravity="center_horizontal"
+                    android:textColor="#000000"
+                    />
+
+                <TextView
+                    android:id="@+id/skierid"
+                    android:text="Skier"
+                    android:layout_margin="1dp"
+                    android:textStyle="bold"
+                    android:padding="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#ffffff"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:textColor="#000000"/>
+            </TableRow>
+        </TableLayout>
+
+       <!-- <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#8e8e83"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_vertical"
+
+           >
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Snowboarder"
+                android:id="@+id/snowborderid"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#8e8e83"/>
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Skier"
+                android:id="@+id/skierid"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"/>
+
+        </LinearLayout>
+
+-->
+
+    </LinearLayout>
+</LinearLayout>
