@@ -1,16 +1,42 @@
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
 android:id="@+id/drawer_layout"
 android:layout_width="match_parent"
-android:layout_height="match_parent" >
+android:layout_height="match_parent"
+    android:background="@drawable/homebg">
 
+   <!-- The drawer icon and screen title-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_alignParentLeft="true"
+            android:onClick="openDrawer"
+            android:src="@drawable/ic_drawer" />
+
+        <TextView
+            style="@style/MainTitleStyle"
+            android:text="@string/title_ridingnow" />
+
+        <TextView
+            style="@style/MainTitleStyle"
+            android:layout_alignParentRight="true"
+            android:text="Refresh"
+            android:layout_marginRight="5dp"
+            android:textStyle="normal" />
+
+    </RelativeLayout>
 <!-- The main content view -->
-
 <FrameLayout
     android:id="@+id/content_frame"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/homebg"
-    >
+    android:layout_height="match_parent">
+   <!-- android:background="@drawable/homebg"-->
+
 
     <RelativeLayout
         android:id="@+id/linerla"
@@ -28,7 +54,6 @@ android:layout_height="match_parent" >
     </RelativeLayout>
 </FrameLayout>
 
-<!-- The navigation drawer -->
 
     <!-- The navigation drawer -->
     <LinearLayout
@@ -46,30 +71,20 @@ android:layout_height="match_parent" >
             android:id="@+id/prImage"
             android:src="@drawable/ic_launcher"
             android:scaleType="fitCenter"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             />
 
         <TextView
             android:id="@+id/usernameid"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="no text"
-            android:textColor="#fff"
-            android:gravity="center_horizontal"
+            style="@style/MenuTitleStyle"
             android:layout_gravity="center_horizontal"
-            android:textStyle="bold"
-            android:textSize="20sp"
             />
 
         <TextView
             android:id="@+id/usertitleid"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="no text"
-            android:textColor="#fff"
-            android:gravity="center_horizontal"
+            style="@style/MenuTitleStyle"
             android:layout_gravity="center_horizontal"
-            android:textStyle="bold"/>
+            />
 
         <ListView
             android:id="@+id/list_view_drawer"
@@ -79,7 +94,7 @@ android:layout_height="match_parent" >
             android:choiceMode="singleChoice"
             android:divider="@android:color/transparent"
             android:dividerHeight="0dp"
-            android:layout_marginTop="30dp"/>
+            android:layout_marginTop="20dp"/>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -88,7 +103,7 @@ android:layout_height="match_parent" >
             android:id="@+id/logoutid"
             android:src="@drawable/logout"
             android:scaleType="fitCenter"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             />
     </LinearLayout>
 

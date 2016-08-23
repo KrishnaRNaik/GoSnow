@@ -13,14 +13,22 @@
 
     <string name="title_error">Error</string>
 
+    <string name="title_ridingnow">RIDING NOW</string>
+    <string name="title_connect">CONNECT</string>
+    <string name="title_events">EVENTS</string>
+    <string name="title_messages">MESSAGES</string>
+    <string name="title_snowbuddies">SNOW BUDDIES</string>
+    <string name="title_notifictions">NOTIFICATIONS NOW</string>
+    <string name="title_settings">SETTINGS</string>
+
     <string-array name="nav_drawer_items">
-        <item>RIDING NOW</item>
-        <item>CONNECT</item>
-        <item>EVENTS</item>
-        <item>MESSAGES</item>
-        <item>SNOW BUDDIES</item>
-        <item>NOTIFICATIONS</item>
-        <item>SETTINGS</item>
+        <item>@string/title_ridingnow</item>
+        <item>@string/title_connect</item>
+        <item>@string/title_events</item>
+        <item>@string/title_messages</item>
+        <item>@string/title_snowbuddies</item>
+        <item>@string/title_notifictions</item>
+        <item>@string/title_settings</item>
 
     </string-array>
     <array name="nav_drawer_icons">
