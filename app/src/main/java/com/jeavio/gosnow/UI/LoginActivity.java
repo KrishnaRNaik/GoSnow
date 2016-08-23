@@ -1,26 +1,27 @@
 package com.jeavio.gosnow.UI;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.facebook.login.LoginManager;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-import com.jeavio.gosnow.Business.BusinessConsts;
 import com.jeavio.gosnow.Business.GoSnowLoginManager;
 import com.jeavio.gosnow.Model.User;
 import com.jeavio.gosnow.R;
@@ -201,13 +202,14 @@ public class LoginActivity extends AppCompatActivity {
 
             // If sign in is successful then show RideNow screen
             if (errorMsg == null) {
-                Intent intent = new Intent(LoginActivity.this, RideNowActivity.class);
-                //intent.putExtra("facebookId", user.getFacebookId());
-                startActivity(intent);
+               /* Intent intent = new Intent(LoginActivity.this, RideNowActivity.class);
+                  startActivity(intent);*/
+                LayoutInflater inflater = getLayoutInflater();
 
+                final AlertDialog RiderTypedlg = CommonUtility.ShowSelectRiderTypeDlg(LoginActivity.this);
                 // If login is successful, then set isFirstTime flag to false
                 CommonUtility.SetIsOpened(LoginActivity.this);
-                finish();
+                //finish();
             }
             else {
                 // Show the error message
