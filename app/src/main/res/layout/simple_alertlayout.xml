@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/titleid"
+        style="@style/MainTitleStyle"
+        android:layout_marginTop="15dp"
+        android:text="Go Snow"
+        />
+
+    <TextView
+        android:id="@+id/msgid"
+        style="@style/MenuTitleStyle"
+        android:textColor="#000000"
+        android:textStyle="normal"
+        android:layout_marginBottom="25dp"
+        android:layout_marginTop="2dp"
+        android:layout_gravity="center_horizontal"
+        android:text="Payment is due yet"
+        />
+
+    <Button
+        android:id="@+id/okid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ok"
+        android:textColor="#0000ff"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_gravity="center_horizontal"/>
+
+</LinearLayout>

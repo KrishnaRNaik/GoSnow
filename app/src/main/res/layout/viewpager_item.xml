@@ -13,10 +13,11 @@
         style="@style/MainTitleStyle"
         android:layout_gravity="right"
         android:layout_marginTop="15dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginRight="25dp"
         android:textStyle="normal"
         android:background="#ffffff"
         android:textColor="#8e8e93"
+        android:padding="3dp"
         />
 
 </FrameLayout>

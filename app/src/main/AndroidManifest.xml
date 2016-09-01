@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.jeavio.gosnow">
+    package="com.gosnowapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".UI.SplashActivity"
+            android:name="com.gosnowapp.UI.SplashActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
 
@@ -24,15 +24,17 @@
             -->
         </activity>
         <activity
-            android:name=".UI.LoginActivity"
+            android:name="com.gosnowapp.UI.LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar">
 
-           <!-- <intent-filter>
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
+            -->
         </activity>
 
         <meta-data
@@ -40,18 +42,20 @@
             android:value="@string/facebook_app_id" />
 
         <activity
-            android:name=".UI.RideNowActivity"
+            android:name="com.gosnowapp.UI.RideNowActivity"
             android:label="@string/title_activity_ride_now"
             android:theme="@style/AppTheme.NoActionBar">
 
-           <!-- <intent-filter>
+            <!--
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
+            -->
         </activity>
         <activity
-            android:name=".UI.StartUpActivity"
+            android:name="com.gosnowapp.UI.StartUpActivity"
             android:label="@string/title_activity_start_up"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -61,20 +65,24 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".UI.OptionsMenuBaseActivity"
+            android:name="com.gosnowapp.UI.OptionsMenuBaseActivity"
             android:label="@string/title_activity_options_menu_base"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".UI.ConnectActivity"
+            android:name="com.gosnowapp.UI.ConnectActivity"
             android:label="@string/title_activity_connect"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".UI.EventsActivity"
+            android:name="com.gosnowapp.UI.EventsActivity"
             android:label="@string/title_activity_events"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".UI.TNCActivity"
+            android:name="com.gosnowapp.UI.TNCActivity"
             android:label="@string/title_activity_tnc"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.gosnowapp.UI.SignupStepsActivity"
+            android:label="@string/title_activity_signup_steps"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

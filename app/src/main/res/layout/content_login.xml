@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.jeavio.gosnow.UI.LoginActivity"
+    tools:context="com.gosnowapp.UI.LoginActivity"
     tools:showIn="@layout/activity_login"
     android:background="@drawable/bglogin">
 

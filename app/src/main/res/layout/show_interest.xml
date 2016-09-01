@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/titleid"
+        style="@style/MainTitleStyle"
+        android:layout_marginTop="15dp"
+        android:text="@string/title_selectinterest"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#8e8e83"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+         >
+
+        <TextView
+            android:id="@+id/interestid"
+            style="@style/MediumLabelStyle"
+            android:layout_margin="5dp"
+            android:text="@string/title_chooseinterest"
+            android:onClick="ShowInterest"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
+            android:id="@+id/arrowid"
+            android:src="@drawable/leftarrow"
+            android:onClick="ShowInterest"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+            style="@style/MenuTitleStyle"
+            android:text="Back"
+            android:layout_marginLeft="5dp"
+            android:textColor="#000000"
+            android:onClick="showPreviousStep"
+            />
+        <TextView
+            style="@style/MenuTitleStyle"
+            android:text="Next"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
+            android:textColor="#000000"
+            android:onClick="showNextStep"
+            />
+    </RelativeLayout>
+
+   </LinearLayout>

@@ -2,11 +2,13 @@ package com.gosnowapp.UI;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ListView;
@@ -68,12 +70,6 @@ public class SignupStepsActivity extends AppCompatActivity {
 
     public  void ShowSelectRiderTypeDlg( ) {
 
-      //  ImageView backbtn = (ImageView) findViewById(R.id.backBtnid);
-      //  backbtn.setVisibility(View.INVISIBLE);
-
-        TextView nextbtn = (TextView) findViewById(R.id.nextbtnid);
-        nextbtn.setVisibility(View.INVISIBLE);
-
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         View dlgView = inflater.inflate(R.layout.select_ridertype,null);
@@ -101,6 +97,23 @@ public class SignupStepsActivity extends AppCompatActivity {
                 selectRiderLevel();
             }
         });
+
+        dialog.setCancelable(false);
+
+        // allow back navigation
+        dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+
+            @Override
+            public boolean onKey(DialogInterface arg0, int keyCode,
+                                 KeyEvent event) {
+                // TODO Auto-generated method stub
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    finish();
+                    return  true;
+                }
+                return false;
+            }
+        });
         dialog.show();
 
     }
@@ -117,18 +130,80 @@ public class SignupStepsActivity extends AppCompatActivity {
         SkillLevelMap.put(getString(R.string.title_mountainpro),5);
 
 
-       // ImageView backbtn = (ImageView) findViewById(R.id.backBtnid);
-       // backbtn.setVisibility(View.VISIBLE);
-
-        TextView nextbtn = (TextView) findViewById(R.id.nextbtnid);
-        nextbtn.setVisibility(View.VISIBLE);
-
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
-        View dlgView = inflater.inflate(R.layout.select_riderlevel,null);
+        final View dlgView = inflater.inflate(R.layout.select_riderlevel,null);
         builder.setView(dlgView);
+
+        if(currentUser.getSkillLevelID() != null && !currentUser.getSkillLevelID().isEmpty())
+        {
+            RadioButton btn1 = (RadioButton)dlgView.findViewById(R.id.firsttimerid);
+            if(btn1.getText().toString().equals(currentUser.getSkillLevel()))
+            {
+                if(!btn1.isChecked())
+                    btn1.toggle();
+            }
+            else
+                btn1 = (RadioButton) dlgView.findViewById(R.id.beginnerid);
+            if (btn1.getText().toString().equals(currentUser.getSkillLevel())) {
+                if (!btn1.isChecked())
+                    btn1.toggle();
+            }
+            else
+                btn1 = (RadioButton) dlgView.findViewById(R.id.intermid);
+            if (btn1.getText().toString().equals(currentUser.getSkillLevel())) {
+                if (!btn1.isChecked())
+                    btn1.toggle();
+            }
+            else
+                btn1 = (RadioButton) dlgView.findViewById(R.id.advncedid);
+            if (btn1.getText().toString().equals(currentUser.getSkillLevel())) {
+                if (!btn1.isChecked())
+                    btn1.toggle();
+            }
+            else
+                btn1 = (RadioButton) dlgView.findViewById(R.id.mountproid);
+            if (btn1.getText().toString().equals(currentUser.getSkillLevel())) {
+                if (!btn1.isChecked())
+                    btn1.toggle();
+            }
+
+        }
+
+
+        RadioGroup levelGrp = (RadioGroup)dlgView.findViewById(R.id.riderlevelgroup);
+        levelGrp.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                // checkedId is the RadioButton selected
+
+                RadioButton checkedBtn = (RadioButton)dlgView.findViewById(checkedId);
+                String skillLevel = checkedBtn.getText().toString();
+                currentUser.setSkillLevel(skillLevel);
+                int skilevelId =  SkillLevelMap.get(skillLevel);
+                currentUser.setSkillLevelID(String.valueOf(skilevelId));
+
+            }
+        });
         SelectSkillLevelDlg = builder.create();
+        SelectSkillLevelDlg.setCancelable(false);
         SelectSkillLevelDlg.show();
+
+        // allow back navigation
+        SelectSkillLevelDlg.setOnKeyListener(new Dialog.OnKeyListener() {
+
+            @Override
+            public boolean onKey(DialogInterface arg0, int keyCode,
+                                 KeyEvent event) {
+                // TODO Auto-generated method stub
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    finish();
+                    return  true;
+                }
+                return false;
+            }
+        });
 
     }
 
@@ -149,13 +224,31 @@ public class SignupStepsActivity extends AppCompatActivity {
         }
 
         SelectDestinationDlg = builder.create();
+        SelectDestinationDlg.setCancelable(false);
         SelectDestinationDlg.show();
+
+        // allow back navigation
+        SelectDestinationDlg.setOnKeyListener(new Dialog.OnKeyListener() {
+
+            @Override
+            public boolean onKey(DialogInterface arg0, int keyCode,
+                                 KeyEvent event) {
+                // TODO Auto-generated method stub
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    finish();
+                    return  true;
+                }
+                return false;
+            }
+        });
+
 
     }
 
     public void ShowInterest(View view)
     {
         SelectInterestDlg.cancel();
+
         InterestMap.put(getString(R.string.title_allterrain),4);
         InterestMap.put(getString(R.string.title_onpiste),1);
         InterestMap.put(getString(R.string.title_offpiste),2);
@@ -169,6 +262,7 @@ public class SignupStepsActivity extends AppCompatActivity {
         builder.setView(dlgView);
 
         final AlertDialog dialog = builder.create();
+        dialog.setCancelable(false);
         dialog.show();
 
          if(currentUser.getInterestName()!= null && !currentUser.getInterestName().isEmpty())
@@ -226,6 +320,20 @@ public class SignupStepsActivity extends AppCompatActivity {
         });
 
 
+        // allow back navigation
+        dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+
+            @Override
+            public boolean onKey(DialogInterface arg0, int keyCode,
+                                 KeyEvent event) {
+                // TODO Auto-generated method stub
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    finish();
+                    return  true;
+                }
+                return false;
+            }
+        });
 
     }
 
@@ -244,7 +352,23 @@ public class SignupStepsActivity extends AppCompatActivity {
             selectedInterest.setText(currentUser.getInterestName());
 
         SelectInterestDlg = builder.create();
+        SelectInterestDlg.setCancelable(false);
         SelectInterestDlg.show();
+
+        // allow back navigation
+        SelectInterestDlg.setOnKeyListener(new Dialog.OnKeyListener() {
+
+            @Override
+            public boolean onKey(DialogInterface arg0, int keyCode,
+                                 KeyEvent event) {
+                // TODO Auto-generated method stub
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    finish();
+                    return  true;
+                }
+                return false;
+            }
+        });
 
     }
 
@@ -273,7 +397,24 @@ public class SignupStepsActivity extends AppCompatActivity {
         builder.setView(dlgView);
 
         ShowDestCountryDlg = builder.create();
+        ShowDestCountryDlg.setCancelable(false);
         ShowDestCountryDlg.show();
+
+        // allow back navigation
+        ShowDestCountryDlg.setOnKeyListener(new Dialog.OnKeyListener() {
+
+            @Override
+            public boolean onKey(DialogInterface arg0, int keyCode,
+                                 KeyEvent event) {
+                // TODO Auto-generated method stub
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    finish();
+                    return  true;
+                }
+                return false;
+            }
+        });
+
 
     }
 
@@ -292,7 +433,23 @@ public class SignupStepsActivity extends AppCompatActivity {
         builder.setView(dlgView);
 
         ShowDestinationDlg = builder.create();
+        ShowDestinationDlg.setCancelable(false);
         ShowDestinationDlg.show();
+
+        // allow back navigation
+        ShowDestinationDlg.setOnKeyListener(new Dialog.OnKeyListener() {
+
+            @Override
+            public boolean onKey(DialogInterface arg0, int keyCode,
+                                 KeyEvent event) {
+                // TODO Auto-generated method stub
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    finish();
+                    return  true;
+                }
+                return false;
+            }
+        });
 
     }
     public void showNextStep(View view)
@@ -302,7 +459,7 @@ public class SignupStepsActivity extends AppCompatActivity {
         {
             case  SELECT_RIDERLEVEL:
             {
-                LayoutInflater inflater = getLayoutInflater();
+               /* LayoutInflater inflater = getLayoutInflater();
                 View dlgView = inflater.inflate(R.layout.select_riderlevel,null);
                 RadioGroup riderLevelSel = (RadioGroup)dlgView.findViewById(R.id.riderlevelgroup);
                 int selectedlevelid = riderLevelSel.getCheckedRadioButtonId();
@@ -310,7 +467,7 @@ public class SignupStepsActivity extends AppCompatActivity {
                 String skillLevel = (String )btn.getText();
                 currentUser.setSkillLevel(skillLevel);
                 currentUser.setSkillLevelID(String.valueOf(SkillLevelMap.get(skillLevel)));
-
+*/
                 if(SelectSkillLevelDlg != null)
                     SelectSkillLevelDlg.cancel();
                 selectNextDestination();
@@ -322,11 +479,18 @@ public class SignupStepsActivity extends AppCompatActivity {
                /* LayoutInflater inflater = getLayoutInflater();
                 View dlgView = inflater.inflate(R.layout.selected_destination_layout,null);
                 TextView selectedDestination = (TextView) dlgView.findViewById(R.id.seldestid);
-                String nextDestinationName = selectedDestination.getText().toString();
-                int nextDestinationId = 0;
-                currentUser.setNextDestinationName(nextDestinationName);
-                currentUser.setNextDestinationId(nextDestinationId);*/
+                if(selectedDestination.getText().toString().equals("Select"))
+                {
+                    Toast.makeText(this,"Please select destination",Toast.LENGTH_SHORT).show();
+                    return;
+                }*/
 
+                if(currentUser.getNextDestinationName() == null || currentUser.getNextDestinationName().isEmpty() )
+                {
+                    Toast.makeText(this,"Please select destination",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                SelectDestinationDlg.cancel();
                 selectInterest();
                 break;
             }
@@ -336,6 +500,12 @@ public class SignupStepsActivity extends AppCompatActivity {
                 LayoutInflater inflater = getLayoutInflater();
                 View dlgView = inflater.inflate(R.layout.show_interest,null);
                 TextView selectedInterestView = (TextView) dlgView.findViewById(R.id.interestid);
+
+                if(currentUser.getInterestName() == null || currentUser.getInterestName().isEmpty())
+                {
+                    Toast.makeText(this,"Please select Interest",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 String selectedInterest = selectedInterestView.getText().toString();
                 currentUser.setInterestName(selectedInterest);
 
@@ -351,6 +521,53 @@ public class SignupStepsActivity extends AppCompatActivity {
 
     }
 
+    public void showPreviousStep(View view)
+    {
+        // User currentUser = Globals.getInstance().getUser();
+        switch (signupStep)
+        {
+            case  SELECT_RIDERLEVEL:
+            {
+               /* LayoutInflater inflater = getLayoutInflater();
+                View dlgView = inflater.inflate(R.layout.select_riderlevel,null);
+                RadioGroup riderLevelSel = (RadioGroup)dlgView.findViewById(R.id.riderlevelgroup);
+                int selectedlevelid = riderLevelSel.getCheckedRadioButtonId();
+                RadioButton  btn = (RadioButton)dlgView.findViewById(selectedlevelid);
+                String skillLevel = (String )btn.getText();
+                currentUser.setSkillLevel(skillLevel);
+                currentUser.setSkillLevelID(String.valueOf(SkillLevelMap.get(skillLevel)));
+
+                if(SelectSkillLevelDlg != null)
+                    SelectSkillLevelDlg.cancel();
+                selectNextDestination();
+*/
+                SelectSkillLevelDlg.cancel();
+                ShowSelectRiderTypeDlg();
+                break;
+            }
+            case SELECT_NEXTDESTINATION:
+            {
+               /* LayoutInflater inflater = getLayoutInflater();
+                View dlgView = inflater.inflate(R.layout.selected_destination_layout,null);
+                TextView selectedDestination = (TextView) dlgView.findViewById(R.id.seldestid);
+                String nextDestinationName = selectedDestination.getText().toString();
+                int nextDestinationId = 0;
+                currentUser.setNextDestinationName(nextDestinationName);
+                currentUser.setNextDestinationId(nextDestinationId);*/
+                SelectDestinationDlg.cancel();
+                selectRiderLevel();
+                break;
+            }
+            case SELECT_INTEREST:
+            {
+                SelectInterestDlg.cancel();
+                selectNextDestination();
+                break;
+            }
+            default:
+                break;
+        }
+    }
 
     private class GetDestinations extends AsyncTask<String, Integer, String> {
 
@@ -423,6 +640,7 @@ public class SignupStepsActivity extends AppCompatActivity {
             if (errorMsg == null) {
                 Intent intent = new Intent(SignupStepsActivity.this, RideNowActivity.class);
                 startActivity(intent);
+                finish();
 
             }
             else {

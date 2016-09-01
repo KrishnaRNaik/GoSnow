@@ -13,12 +13,13 @@
 
     <string name="title_error">Error</string>
 
+    <!-- menu options-->
     <string name="title_ridingnow">RIDING NOW</string>
     <string name="title_connect">CONNECT</string>
     <string name="title_events">EVENTS</string>
     <string name="title_messages">MESSAGES</string>
     <string name="title_snowbuddies">SNOW BUDDIES</string>
-    <string name="title_notifictions">NOTIFICATIONS NOW</string>
+    <string name="title_notifictions">NOTIFICATIONS</string>
     <string name="title_settings">SETTINGS</string>
 
     <string-array name="nav_drawer_items">
@@ -39,6 +40,32 @@
         <item>@drawable/ic_launcher</item>
         <item>@drawable/ic_launcher</item>
     </array>
+
+    <!-- Rider level-->
+    <string name="title_firsttimer">First Timer</string>
+    <string name="title_beginner">Beginner</string>
+    <string name="title_intermediate">InterMediate</string>
+    <string name="title_advanced">Advanced</string>
+    <string name="title_mountainpro">All Mountain Pro</string>
+
+    <string name="title_selectlevel">WHAT LEVEL ARE YOU?</string>
+
+    <!-- Interest types-->
+    <string name="title_allterrain">All Terrain</string>
+    <string name="title_onpiste">On Piste</string>
+    <string name="title_offpiste">Off Piste</string>
+    <string name="title_parks">Parks</string>
+    <string name="title_apres">Apres</string>
+
+    <string name="title_selectinterest">Likely To Be Found AT</string>
+    <string name="title_chooseinterest">Choose Interest</string>
+
+
+    <!-- next destination-->
+    <string name="title_seldestination">WHAT IS YOUR NEXT DESTINATION</string>
+    <string name="title_nexttrip1">What is your</string>
+    <string name="title_nexttrip2">Next Planned Trip</string>
+
     <string name="title_activity_connect">ConnectActivity</string>
     <string name="title_activity_events">EventsActivity</string>
 
@@ -47,7 +74,7 @@
     <string name="title_terms3">Terms and Conditions</string>
     <string name="title_activity_tnc">TNCActivity</string>
     <string name="title_loadingpage">"Loading Page"</string>
-
+    <string name="title_activity_signup_steps">SignupStepsActivity</string>
 
 
 </resources>

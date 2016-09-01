@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:text="@string/title_selectlevel"
+        android:id="@+id/titleid"
+        style="@style/MainTitleStyle"
+        android:layout_margin="20dp"
+        />
+
+    <RadioGroup
+        android:id="@+id/riderlevelgroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center_horizontal"
+        >
+
+        <RadioButton
+            android:id="@+id/firsttimerid"
+            style="@style/RadioButtonStyle"
+            android:checked="true"
+            android:text="@string/title_firsttimer"
+            />
+
+        <RadioButton
+            android:id="@+id/beginnerid"
+            style="@style/RadioButtonStyle"
+            android:text="@string/title_beginner"
+            />
+        <RadioButton
+            android:id="@+id/intermid"
+            android:text="@string/title_intermediate"
+            style="@style/RadioButtonStyle"
+            />
+        <RadioButton
+            android:id="@+id/advncedid"
+            style="@style/RadioButtonStyle"
+            android:text="@string/title_advanced"
+            />
+        <RadioButton
+            android:id="@+id/mountproid"
+            style="@style/RadioButtonStyle"
+            android:text="@string/title_mountainpro"
+           />
+    </RadioGroup>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+
+        <TextView
+           style="@style/MenuTitleStyle"
+            android:text="Back"
+            android:layout_marginLeft="5dp"
+            android:textColor="#000000"
+            android:onClick="showPreviousStep"
+            />
+        <TextView
+           style="@style/MenuTitleStyle"
+            android:text="Next"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
+            android:textColor="#000000"
+            android:onClick="showNextStep"
+            />
+    </RelativeLayout>
+
+</LinearLayout>
